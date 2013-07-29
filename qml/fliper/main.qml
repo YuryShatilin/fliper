@@ -19,7 +19,6 @@ Rectangle {
         anchors.centerIn: parent
         columns: 5
         rows: 5
-//        spacing: 10
         Repeater {
             model: 25
             Chip {
@@ -52,19 +51,4 @@ Rectangle {
             }
         }
     }
-/*
-        anchors.centerIn: parent
-        color: "blue"
-        style: Text.Outline; styleColor: "white"
-        font.pixelSize: 50; font.bold: true
-        visible: false
-
-        Timer {
-            running: messageDisplay.visible
-            onTriggered: {
-                messageDisplay.visible = false;
-                Logic.restartGame();
-            }
-        }
-  */
 }

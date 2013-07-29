@@ -8,8 +8,8 @@ Item {
     height: 100
 
     states: [
-        State { name: 'RED'; PropertyChanges { target: image; color: "red" } },
-        State { name: 'WHITE'; PropertyChanges { target: image; color: "white" } }
+        State { name: 'RED'; PropertyChanges { target: image; gradient: redGradient } },
+        State { name: 'WHITE'; PropertyChanges { target: image; gradient: whiteGradient } }
     ]
 
     Rectangle {
@@ -19,6 +19,7 @@ Item {
         radius: 60
         height: rect.height - 20
         width: rect.width - 20
+        gradient: redGradient
     }
 
     Rectangle {
@@ -34,6 +35,19 @@ Item {
         onClicked: {
             parent.clicked();
         }
+    }
+
+    Gradient {
+        id: redGradient
+        GradientStop {position: 0.0; color: "gray" }
+        GradientStop {position: 1.0; color: "red" }
+        //GradientStop {position: 0.0; color: "red" }
+    }
+
+    Gradient {
+        id: whiteGradient
+        GradientStop {position: 0.0; color: "gray" }
+        GradientStop {position: 1.0; color: "white" }
     }
 
 }
