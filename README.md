@@ -1,4 +1,6 @@
 fliper
 ======
-![scrot](https://raw.github.com/dismay/fliper/master/scrot.png)
 Simple logic game
+
+Screenshot
+![scrot](https://raw.github.com/dismay46/fliper/master/scrot.png)
