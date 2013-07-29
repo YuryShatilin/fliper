@@ -4,16 +4,29 @@ import QtQuick 1.1
 Item {
     signal clicked
 
+    width: 100
+    height: 100
+
     states: [
-        State { name: "RED"; PropertyChanges { target: image; source: "pics/x.png" } },
-        State { name: "WHITE"; PropertyChanges { target: image; source: "pics/o.png" } }
+        State { name: 'RED'; PropertyChanges { target: image; color: "red" } },
+        State { name: 'WHITE'; PropertyChanges { target: image; color: "white" } }
     ]
 
     Rectangle {
-        anchors.centerIn: parent
+        id: image
+        anchors.centerIn: rect
         color: "red"
-        radius: 50
-        width: 100
+        radius: 60
+        height: rect.height - 20
+        width: rect.width - 20
+    }
+
+    Rectangle {
+       id: rect
+       anchors.fill: parent
+//       color: "white"
+       color: Qt.rgba(0,0,0,0)
+       border.color: "black"
     }
 
     MouseArea {
