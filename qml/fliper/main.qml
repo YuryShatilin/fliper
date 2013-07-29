@@ -31,10 +31,40 @@ Rectangle {
 
                     if (Logic.isWin()) {
                         console.log("Победа");
+                        winsMessage.visible = true;
                     }
                 }
             }
         }
     }
 
+    Text {
+        id: winsMessage
+        text: "WIN!!!"
+        color: "pink"
+        style: Text.Outline; styleColor: "white"
+        font.pixelSize: 50; font.bold: true
+        visible: false
+        MouseArea {
+            anchors.fill: parent
+            onClicked: {
+                Logic.restartGame();
+            }
+        }
+    }
+/*
+        anchors.centerIn: parent
+        color: "blue"
+        style: Text.Outline; styleColor: "white"
+        font.pixelSize: 50; font.bold: true
+        visible: false
+
+        Timer {
+            running: messageDisplay.visible
+            onTriggered: {
+                messageDisplay.visible = false;
+                Logic.restartGame();
+            }
+        }
+  */
 }
