@@ -1,8 +1,12 @@
+function toRed (){}
+function toWhite (){}
+
 function flip(index) {
 
     changeState(gridGame.children[index]);
     // left
-    var i = (index % 5 - 1) > 0 ? index - 1 : -1;
+    var i = (index % 5 ) > 0 ? index - 1 : -1;
+    console.log("left: ", i, index )
     if (i >= 0 ) {
         changeState(gridGame.children[i]);
     }
@@ -28,10 +32,16 @@ function flip(index) {
 }
 
 function changeState(chip) {
+
     if (chip.state == 'RED') {
+        
         chip.state = 'WHITE';
+        chip.toWhite();
+
     } else {
+
         chip.state = 'RED';
+        chip.toRed();
     }
 }
 

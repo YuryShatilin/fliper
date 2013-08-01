@@ -10,7 +10,7 @@ Rectangle {
     Rectangle {
         id: board
         anchors.fill: parent
-        color: "#a0b3c6"
+        color: "#eed"
 
     }
 
@@ -25,9 +25,8 @@ Rectangle {
                 state: 'RED'
                 width: board.width/5 - 10
                 height: board.height / 5 - 10
-                onClicked: {
-                    Logic.flip(index);
 
+                onClicked: {
                     if (Logic.isWin()) {
                         console.log("Победа");
                         winsMessage.visible = true;
