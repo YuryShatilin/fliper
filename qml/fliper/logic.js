@@ -1,5 +1,6 @@
-function toRed (){}
-function toWhite (){}
+var undoQue = [],
+    redoQue = [];
+var haha = "asdas";
 
 function flip(index) {
 
@@ -59,4 +60,28 @@ function restartGame() {
     for (var i = 0 ; i < 25 ; i++) {
         gridGame.children[i] = 'RED';
     }
+}
+
+function undo(ques) {
+
+    if (!ques.undoQue.length) { return false; }
+
+    var prevIndex = ques.undoQue.pop();
+    flip(prevIndex);
+    undoButton.color = ques.undoQue.length ? "#888" : "#ccc";
+
+    ques.redoQue.push(prevIndex);
+    redoButton.color = "#888";
+
+}
+
+function redo(ques) {
+    if (!ques.redoQue.length) { return false; }
+
+    var nextIndex = ques.redoQue.pop();
+    flip(nextIndex);
+    ques.undoQue.push(nextIndex);
+
+    undoButton.color = "#888";
+    redoButton.color = ques.redoQue.length ? "#888" : "#ccc";
 }
