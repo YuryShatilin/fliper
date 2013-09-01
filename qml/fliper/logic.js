@@ -1,6 +1,5 @@
 var undoQue = [],
     redoQue = [];
-var haha = "asdas";
 
 function flip(index) {
 
