@@ -1,5 +1,5 @@
 // import QtQuick 1.0 // to target S60 5th Edition or Maemo 5
-import QtQuick 1.1
+import QtQuick 2.0
 
 Item {
     property alias img: image.source
@@ -9,13 +9,14 @@ Item {
 
     Image {
         id: image
-
         anchors.fill: parent
         visible: source == "" ? false : true
     }
 
     Text {
         id: label
+        anchors.centerIn: parent
+        text: ""
         visible: text == "" ? false : true
     }
 
@@ -26,5 +27,4 @@ Item {
             //clicked()
         }
     }
-
 }

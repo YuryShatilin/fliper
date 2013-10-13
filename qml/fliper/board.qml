@@ -1,5 +1,5 @@
 // import QtQuick 1.0 // to target S60 5th Edition or Maemo 5
-import QtQuick 1.1
+import QtQuick 2.0
 
 import "logic.js" as Logic
 
@@ -9,6 +9,9 @@ import "logic.js" as Logic
 
 Rectangle {
     id: root
+
+    property int N: 10
+    property int M: 10
 
     // TOP panel
     Rectangle {
@@ -69,11 +72,11 @@ Rectangle {
             id: gridGame
 
             anchors.centerIn: board
-            columns: 5
-            rows: 5
+            columns: root.N
+            rows: root.M
 
             Repeater {
-                model: 25
+                model: parent.columns * parent.rows
                 Chip {
                     state: 'RED'
                     width: board.width/5 - 10
