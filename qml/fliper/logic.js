@@ -1,8 +1,6 @@
 var undoQue = [],
     redoQue = [];
 
-// TODO: release this
-
 function flip(index) {
 
     changeState(gridGame.children[index]);
@@ -20,12 +18,12 @@ function flip(index) {
         changeState(gridGame.children[i]);
     }
 
-    if (pos.row < root.sizeGame) {
+    if (pos.row + 1 < root.sizeGame) {
         i = globalIndex(pos.row + 1, pos.col);
         changeState(gridGame.children[i]);
     }
 
-    if (pos.col < root.sizeGame) {
+    if (pos.col + 1 < root.sizeGame) {
         i = globalIndex(pos.row, pos.col + 1);
         changeState(gridGame.children[i]);
     }
