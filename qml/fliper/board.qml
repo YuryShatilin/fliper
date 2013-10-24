@@ -10,8 +10,10 @@ import "logic.js" as Logic
 Rectangle {
     id: root
 
-    property int N: 10
-    property int M: 10
+    property int sizeGame: 5
+    property int maxSize: 100
+    property int minSize: 3
+
 
     // TOP panel
     Rectangle {
@@ -29,7 +31,7 @@ Rectangle {
             id:undoButton
             anchors.left: parent.left
             anchors.leftMargin: 15
-
+            anchors.verticalCenter: topPanel.verticalCenter
             text: "←"
             font.pixelSize: 50; font.bold: true
             width: 50
@@ -43,15 +45,55 @@ Rectangle {
         Button {
             id:redoButton
             anchors.left: undoButton.right
-            anchors.leftMargin: 1
+            anchors.leftMargin: 20
+            anchors.verticalCenter: topPanel.verticalCenter
             text: "→"
             font.pixelSize: 50; font.bold: true
+            width: 50
+            height: 50
 
-            MouseArea {
-                anchors.fill: parent
-                onClicked: {
-                    Logic.redo({"undoQue": Logic.undoQue, "redoQue": Logic.redoQue});
-                }
+//            MouseArea {
+//                anchors.fill: parent
+//                onClicked: {
+//                    Logic.redo({"undoQue": Logic.undoQue, "redoQue": Logic.redoQue});
+//                }
+//            }
+            onClicked: {
+                Logic.redo({"undoQue": Logic.undoQue, "redoQue": Logic.redoQue});
+            }
+        }
+
+        Button {
+            id: incSizeButton
+            anchors.verticalCenter: topPanel.verticalCenter
+            anchors.right: topPanel.right
+            anchors.rightMargin: 20
+            text: "INC+"
+            font.pixelSize: 14; font.bold: true
+            width: 50
+            height: 50
+            onClicked:  {
+                if (sizeGame < maxSize)
+                    sizeGame += 1;
+
+                Logic.restartGame();
+            }
+        }
+
+        Button {
+            id: decSizeButton
+            anchors.verticalCenter: topPanel.verticalCenter
+            anchors.right: incSizeButton.left
+            anchors.rightMargin: 20
+            text: "DEC-"
+            font.pixelSize: 14; font.bold: true
+            width: 50
+            height: 50
+            onClicked:  {
+                if (sizeGame > minSize)
+                    sizeGame -= 1;
+
+                Logic.restartGame();
             }
         }
 
@@ -72,15 +114,20 @@ Rectangle {
             id: gridGame
 
             anchors.centerIn: board
-            columns: root.N
-            rows: root.M
 
+            height: (board.height > board.width) ? board.width : board.height
+            width: height
+            columns: root.sizeGame
+            rows: root.sizeGame
+            property int chipHeight : height / rows
+            property int chipWidth : width / columns
             Repeater {
+                anchors.centerIn: parent
                 model: parent.columns * parent.rows
                 Chip {
                     state: 'RED'
-                    width: board.width/5 - 10
-                    height: board.height / 5 - 10
+                    width: gridGame.chipWidth
+                    height: gridGame.chipHeight
 
                     onClicked: {
                         Logic.undoQue.push(index);

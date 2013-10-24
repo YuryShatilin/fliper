@@ -1,35 +1,48 @@
 var undoQue = [],
     redoQue = [];
 
+// TODO: release this
+
 function flip(index) {
 
     changeState(gridGame.children[index]);
-    // left
-    var i = (index % 5 ) > 0 ? index - 1 : -1;
-    console.log("left: ", i, index )
-    if (i >= 0 ) {
+    var pos = localIndex(index);
+
+    var i = 0;
+
+    if (pos.row !== 0) {
+        i = globalIndex(pos.row - 1, pos.col);
         changeState(gridGame.children[i]);
     }
 
-    // top
-    i = index - 5;
-    if (i >= 0 ) {
+    if (pos.col !== 0) {
+        i = globalIndex(pos.row, pos.col - 1);
         changeState(gridGame.children[i]);
     }
 
-    // right
-    i = (index % 5 + 1) < 5 ? index + 1 : 25;
-    if (i < 25) {
+    if (pos.row < root.sizeGame) {
+        i = globalIndex(pos.row + 1, pos.col);
         changeState(gridGame.children[i]);
     }
 
-    // bottom
-    i = index + 5;
-    if (i < 25) {
+    if (pos.col < root.sizeGame) {
+        i = globalIndex(pos.row, pos.col + 1);
         changeState(gridGame.children[i]);
     }
 
 }
+
+function globalIndex(i, j) {
+    return i*root.sizeGame + j;
+}
+
+function localIndex(index) {
+    return {
+        col: index % root.sizeGame,
+        row: Math.floor(index / root.sizeGame)
+    };
+}
+
 
 function changeState(chip) {
 
@@ -56,7 +69,7 @@ function isWin() {
 }
 
 function restartGame() {
-    for (var i = 0 ; i < 25 ; i++) {
+    for (var i = 0 ; i < root.sizeGame ; i++) {
         gridGame.children[i] = 'RED';
     }
 }
